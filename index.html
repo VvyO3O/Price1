@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<title>三角洲收号报价助手</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>三角洲收号助手</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    background: #f4f5f7;
+    background: #f5f6f8;
     color: #222;
     font-family:
         -apple-system,
@@ -30,91 +24,114 @@ body {
 
 .container {
     width: 100%;
-    max-width: 600px;
-    margin: auto;
-    padding: 18px 15px 35px;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 18px 14px 40px;
 }
 
-.title {
+h1 {
+    font-size: 24px;
     text-align: center;
-    font-size: 25px;
-    font-weight: 700;
-    margin-top: 10px;
-}
-
-.subtitle {
-    text-align: center;
-    color: #888;
-    font-size: 13px;
-    margin-top: 6px;
-    margin-bottom: 18px;
+    margin: 8px 0 20px;
 }
 
 .card {
     background: white;
-    border-radius: 16px;
+    border-radius: 14px;
     padding: 16px;
     margin-bottom: 14px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-.label {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 10px;
+.card-title {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 12px;
 }
 
 textarea {
     width: 100%;
-    height: 240px;
-    resize: none;
+    min-height: 220px;
+    resize: vertical;
     border: 1px solid #ddd;
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 12px;
     font-size: 15px;
     line-height: 1.6;
     outline: none;
-    background: #fafafa;
 }
 
-textarea:focus {
-    border-color: #555;
-    background: white;
+textarea:focus,
+input:focus,
+select:focus {
+    border-color: #222;
 }
 
-.ratio-row {
+.row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.input-group {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.ratio-text {
-    font-size: 18px;
-    font-weight: 600;
+.input-group input {
+    width: 90px;
 }
 
-input {
-    flex: 1;
-    height: 45px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 0 12px;
-    font-size: 17px;
-    outline: none;
-}
-
-input:focus {
-    border-color: #555;
-}
-
-.button {
+input,
+select {
     width: 100%;
-    height: 48px;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
+    height: 42px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    padding: 0 10px;
+    font-size: 15px;
+    background: white;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.result-item {
+    background: #f7f7f7;
+    border-radius: 9px;
+    padding: 10px;
+    min-height: 55px;
+}
+
+.result-label {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 4px;
+}
+
+.result-value {
+    font-size: 15px;
     font-weight: 600;
-    margin-top: 10px;
+    word-break: break-all;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+button {
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .primary {
@@ -123,1310 +140,777 @@ input:focus {
 }
 
 .secondary {
-    background: #eeeeee;
-    color: #333;
+    background: #e9eaed;
+    color: #222;
+}
+
+.green {
+    background: #2f9e44;
+    color: white;
+}
+
+.blue {
+    background: #1971c2;
+    color: white;
 }
 
 .danger {
     background: #f1f1f1;
-    color: #666;
+    color: #d33;
 }
 
-.info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.info-item {
+.price-box {
     background: #f7f7f7;
-    border-radius: 10px;
-    padding: 12px;
-}
-
-.info-name {
-    color: #888;
-    font-size: 12px;
-}
-
-.info-value {
-    margin-top: 4px;
-    font-size: 17px;
-    font-weight: 600;
-}
-
-.recommend {
-    background: #f5f5f5;
     border-radius: 12px;
-    padding: 15px;
-    margin-top: 12px;
+    padding: 14px;
 }
 
-.recommend-title {
-    color: #888;
-    font-size: 13px;
-}
-
-.recommend-value {
-    font-size: 24px;
-    font-weight: 800;
-    margin-top: 4px;
-}
-
-.reason {
-    color: #777;
-    font-size: 13px;
-    margin-top: 7px;
-    line-height: 1.5;
-}
-
-.tip {
-    text-align: center;
-    color: #999;
-    font-size: 12px;
-    margin-top: 15px;
-}
-
-
-/* =========================
-   弹窗
-========================= */
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.45);
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.modal.show {
+.price-line {
     display: flex;
-}
-
-.modal-box {
-    width: 100%;
-    max-width: 420px;
-    background: white;
-    border-radius: 20px;
-    padding: 24px 20px;
-    text-align: center;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-}
-
-.modal-title {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.modal-ratio {
-    color: #777;
-    margin-bottom: 20px;
-}
-
-.price-list {
-    text-align: left;
-    background: #f7f7f7;
-    border-radius: 12px;
-    padding: 15px;
-    line-height: 2;
+    justify-content: space-between;
+    padding: 7px 0;
     font-size: 15px;
 }
 
 .total {
-    font-size: 27px;
-    font-weight: 800;
-    margin: 20px 0;
+    border-top: 1px solid #ddd;
+    margin-top: 7px;
+    padding-top: 12px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.close-button {
-    background: #eeeeee;
-    color: #333;
+.tip {
+    color: #888;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 8px;
 }
 
+.status {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #2f9e44;
+    min-height: 18px;
+}
+
+@media (max-width: 500px) {
+    .container {
+        padding: 12px 10px 30px;
+    }
+
+    h1 {
+        font-size: 21px;
+    }
+
+    .card {
+        padding: 13px;
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .buttons {
+        grid-template-columns: 1fr 1fr;
+    }
+}
 </style>
-
 </head>
-
 
 <body>
 
-
 <div class="container">
 
-
-<div class="title">
-    三角洲收号报价助手
-</div>
-
-<div class="subtitle">
-    粘贴客户信息 · 自动识别 · 自动推荐比例 · 快速报价
-</div>
-
-
-<!-- =========================
-     客户信息
-========================= -->
-
-<div class="card">
-
-<div class="label">
-    客户账号信息
-</div>
-
-<textarea
-    id="customerInfo"
-    placeholder="把客户发来的账号信息粘贴到这里……"
-></textarea>
-
-</div>
-
-
-<!-- =========================
-     比例
-========================= -->
-
-<div class="card">
-
-<div class="label">
-    哈弗币比例
-</div>
-
-<div class="ratio-row">
-
-<span class="ratio-text">
-    1 :
-</span>
-
-<input
-    id="ratio"
-    type="number"
-    value="42"
->
-
-</div>
-
-
-<div
-    id="recommendBox"
-    class="recommend"
-    style="display:none;"
->
-
-<div class="recommend-title">
-    系统建议比例
-</div>
-
-<div
-    id="recommendValue"
-    class="recommend-value"
->
-    1:42
-</div>
-
-<div
-    id="recommendReason"
-    class="reason"
->
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     操作
-========================= -->
-
-<div class="card">
-
-<button
-    class="button primary"
-    onclick="analyze()"
->
-    自动识别并推荐比例
-</button>
-
-
-<button
-    class="button primary"
-    onclick="calculate()"
->
-    计算报价
-</button>
-
-
-<button
-    class="button secondary"
-    onclick="loadExample()"
->
-    载入示例
-</button>
-
-
-<button
-    class="button danger"
-    onclick="clearAll()"
->
-    清空
-</button>
-
-</div>
-
-
-<!-- =========================
-     识别结果
-========================= -->
-
-<div
-    class="card"
-    id="infoCard"
-    style="display:none;"
->
-
-<div class="label">
-    自动识别结果
-</div>
-
-
-<div class="info-grid">
-
-
-<div class="info-item">
-
-<div class="info-name">
-    安全箱
-</div>
-
-<div
-    class="info-value"
-    id="boxValue"
->
-    -
-</div>
-
-</div>
-
-
-<div class="info-item">
-
-<div class="info-name">
-    体力等级
-</div>
-
-<div
-    class="info-value"
-    id="staminaValue"
->
-    -
-</div>
-
-</div>
-
-
-<div class="info-item">
-
-<div class="info-name">
-    负重等级
-</div>
-
-<div
-    class="info-value"
-    id="weightValue"
->
-    -
-</div>
-
-</div>
-
-
-<div class="info-item">
-
-<div class="info-name">
-    红皮
-</div>
-
-<div
-    class="info-value"
-    id="redSkinValue"
->
-    -
-</div>
-
-</div>
-
-
-<div class="info-item">
-
-<div class="info-name">
-    刀皮
-</div>
-
-<div
-    class="info-value"
-    id="knifeSkinValue"
->
-    -
-</div>
-
-</div>
-
-
-<div class="info-item">
-
-<div class="info-name">
-    仓库纯币
-</div>
-
-<div
-    class="info-value"
-    id="moneyValue"
->
-    -
-</div>
-
-</div>
-
-
-<div class="info-item">
-
-<div class="info-name">
-    AW
-</div>
-
-<div
-    class="info-value"
-    id="awValue"
->
-    -
-</div>
-
-</div>
-
-
-<div class="info-item">
-
-<div class="info-name">
-    红弹
-</div>
-
-<div
-    class="info-value"
-    id="redValue"
->
-    -
-</div>
-
-</div>
-
-
-<div class="info-item">
-
-<div class="info-name">
-    六头
-</div>
-
-<div
-    class="info-value"
-    id="headValue"
->
-    -
-</div>
-
-</div>
-
-
-<div class="info-item">
-
-<div class="info-name">
-    六甲
-</div>
-
-<div
-    class="info-value"
-    id="armorValue"
->
-    -
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-<div class="tip">
-    1 : 42 = 1 元购买 42 万哈弗币
-</div>
-
-
-</div>
-
-
-<!-- =========================
-     报价弹窗
-========================= -->
-
-<div
-    class="modal"
-    id="resultModal"
->
-
-<div class="modal-box">
-
-
-<div class="modal-title">
-    报价结果
-</div>
-
-
-<div
-    class="modal-ratio"
-    id="resultRatio"
->
-    哈弗币比例：1 : 42
-</div>
-
-
-<div
-    class="price-list"
-    id="priceList"
->
-</div>
-
-
-<div
-    class="total"
-    id="totalPrice"
->
-    最终报价：¥0.00
-</div>
-
-
-<button
-    class="button primary"
-    onclick="copyQuote()"
->
-    复制报价
-</button>
-
-
-<button
-    class="button close-button"
-    onclick="closeModal()"
->
-    关闭
-</button>
-
-
-</div>
+    <h1>三角洲收号助手</h1>
+
+    <!-- 客户信息 -->
+    <div class="card">
+        <div class="card-title">① 客户信息</div>
+
+        <textarea id="customerText"
+            placeholder="把客户微信发来的完整信息粘贴到这里……"></textarea>
+
+        <div class="buttons" style="margin-top:10px;">
+            <button class="primary" onclick="parseInfo()">开始解析</button>
+            <button class="secondary" onclick="loadExample()">载入示例</button>
+        </div>
+    </div>
+
+    <!-- 报价 -->
+    <div class="card">
+        <div class="card-title">② 报价</div>
+
+        <div class="row">
+            <div style="white-space:nowrap;">哈弗币比例</div>
+
+            <div class="input-group">
+                <span>1 :</span>
+                <input id="ratio" type="number" value="42" min="1" step="1">
+            </div>
+        </div>
+
+        <div class="tip">
+            比例由你自己判断，例如 1:42 就输入 42。
+        </div>
+
+        <div style="margin-top:12px;">
+            <button class="blue" style="width:100%;" onclick="calculatePrice()">
+                计算报价
+            </button>
+        </div>
+
+        <div id="priceResult" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- 识别结果 -->
+    <div class="card">
+        <div class="card-title">③ 识别结果</div>
+
+        <div class="result-grid">
+
+            <div class="result-item">
+                <div class="result-label">账号编号</div>
+                <div class="result-value" id="r_id">待生成</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">区服</div>
+                <div class="result-value" id="r_server">未识别</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">等级</div>
+                <div class="result-value" id="r_level">未识别</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">纯币</div>
+                <div class="result-value" id="r_money">未识别</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">出租价值</div>
+                <div class="result-value" id="r_rent">未生成</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">体力等级</div>
+                <div class="result-value" id="r_stamina">未识别</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">负重等级</div>
+                <div class="result-value" id="r_weight">未识别</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">段位</div>
+                <div class="result-value" id="r_rank">未识别</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">皮肤</div>
+                <div class="result-value" id="r_skin">未识别</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">保险</div>
+                <div class="result-value" id="r_safe">未识别</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">登录方式</div>
+                <div class="result-value" id="r_login">未识别</div>
+            </div>
+
+            <div class="result-item">
+                <div class="result-label">设备类型</div>
+                <div class="result-value" id="r_device">未识别</div>
+            </div>
+
+        </div>
+
+        <div style="margin-top:10px;">
+            <div class="result-item">
+                <div class="result-label">订单备注</div>
+                <div class="result-value" id="r_note">未生成</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 入库 -->
+    <div class="card">
+        <div class="card-title">④ 入库腾讯文档</div>
+
+        <button class="green" style="width:100%;" onclick="copyForTencentDocs()">
+            复制入库数据
+        </button>
+
+        <div class="tip">
+            复制后，直接粘贴到腾讯文档对应的新行即可自动分列。
+        </div>
+
+        <div id="copyStatus" class="status"></div>
+    </div>
+
+    <!-- 清空 -->
+    <div class="card">
+        <button class="danger" style="width:100%;" onclick="clearAll()">
+            清空
+        </button>
+    </div>
 
 </div>
 
 
 <script>
 
+/* =========================
+   当前账号数据
+========================= */
 
-// =========================================================
-// 获取冒号后面的内容
-// =========================================================
+let accountData = {
+    id: "",
+    server: "",
+    level: "",
+    money: "",
+    stamina: "",
+    weight: "",
+    rank: "",
+    skin: "",
+    safe: "",
+    login: "",
+    device: "",
+    note: "",
+    aw: 0,
+    redAmmo: 0,
+    sixHead: 0,
+    sixArmor: 0
+};
 
-function getValue(line) {
 
-    const parts = line.split(/[:：]/);
+/* =========================
+   工具函数
+========================= */
 
-    if (parts.length >= 2) {
+function setText(id, value) {
+    document.getElementById(id).textContent =
+        value === undefined || value === null || value === ""
+        ? "未识别"
+        : value;
+}
 
-        return parts.slice(1).join(":").trim();
 
+function cleanMoney(value) {
+
+    if (!value) return "";
+
+    value = String(value)
+        .replace(/,/g, "")
+        .trim()
+        .toLowerCase();
+
+    let num = parseFloat(value);
+
+    if (isNaN(num)) return "";
+
+    if (value.includes("亿")) {
+        return num * 100 + "M";
     }
+
+    if (value.includes("m")) {
+        return num + "M";
+    }
+
+    return num + "M";
+}
+
+
+function extractNumber(text) {
+    if (!text) return 0;
+
+    let match = text.match(/[\d.]+/);
+
+    if (!match) return 0;
+
+    return parseFloat(match[0]);
+}
+
+
+/* =========================
+   解析客户信息
+========================= */
+
+function parseInfo() {
+
+    const text = document.getElementById("customerText").value;
+
+    if (!text.trim()) {
+        alert("请先粘贴客户信息。");
+        return;
+    }
+
+    /* 账号编号 */
+
+    accountData.id = generateAccountId();
+
+
+    /* 区服 */
+
+    let server = "";
+
+    if (/qq|QQ/.test(text)) {
+        server = "QQ区";
+    } else if (/微信区|微信/.test(text)) {
+        server = "微信区";
+    } else if (/安卓/.test(text)) {
+        server = "安卓";
+    } else if (/苹果|ios|iOS/.test(text)) {
+        server = "苹果";
+    }
+
+    accountData.server = server;
+
+
+    /* 等级 */
+
+    let levelMatch =
+        text.match(/游戏等级\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/等级\s*[:：]\s*([^\n]+)/i);
+
+    accountData.level =
+        levelMatch ? levelMatch[1].trim() : "";
+
+
+    /* 纯币 */
+
+    let moneyMatch =
+        text.match(/仓库纯币\s*[（(]?M[）)]?\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/仓库纯币\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/纯币\s*[:：]\s*([^\n]+)/i);
+
+    accountData.money =
+        moneyMatch ? cleanMoney(moneyMatch[1]) : "";
+
+
+    /* 体力 */
+
+    let staminaMatch =
+        text.match(/体力等级\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/体力\s*[:：]\s*([^\n]+)/i);
+
+    accountData.stamina =
+        staminaMatch ? staminaMatch[1].trim() : "";
+
+
+    /* 负重 */
+
+    let weightMatch =
+        text.match(/负重等级\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/负重\s*[:：]\s*([^\n]+)/i);
+
+    accountData.weight =
+        weightMatch ? weightMatch[1].trim() : "";
+
+
+    /* 段位 */
+
+    let rankMatch =
+        text.match(/游戏段位\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/段位\s*[:：]\s*([^\n]+)/i);
+
+    accountData.rank =
+        rankMatch ? rankMatch[1].trim() : "";
+
+
+    /* 皮肤 */
+
+    let skinMatch =
+        text.match(/皮肤\s*[:：]\s*([^\n]+)/i);
+
+    accountData.skin =
+        skinMatch ? skinMatch[1].trim() : "";
+
+
+    /* 保险 / 安全箱 */
+
+    let safeMatch =
+        text.match(/赛季安全箱\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/安全箱\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/保险\s*[:：]\s*([^\n]+)/i);
+
+    accountData.safe =
+        safeMatch ? safeMatch[1].trim() : "";
+
+
+    /* 登录方式 */
+
+    let loginMatch =
+        text.match(/登陆方式\s*（.*?）\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/登录方式\s*（.*?）\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/登陆方式\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/登录方式\s*[:：]\s*([^\n]+)/i);
+
+    accountData.login =
+        loginMatch ? loginMatch[1].trim() : "";
+
+
+    /* AW */
+
+    let awMatch =
+        text.match(/aw数量\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/AW数量\s*[:：]\s*([^\n]+)/i) ||
+        text.match(/\baw\s*[:：]\s*([^\n]+)/i);
+
+    accountData.aw =
+        awMatch ? extractNumber(awMatch[1]) : 0;
+
+
+    /* 红弹 */
+
+    let redMatch =
+        text.match(/红弹\s*[:：]\s*([^\n]+)/i);
+
+    accountData.redAmmo =
+        redMatch ? extractNumber(redMatch[1]) : 0;
+
+
+    /* 六头 */
+
+    let headMatch =
+        text.match(/六头\s*[:：]\s*([^\n]+)/i);
+
+    accountData.sixHead =
+        headMatch ? extractNumber(headMatch[1]) : 0;
+
+
+    /* 六甲 */
+
+    let armorMatch =
+        text.match(/六甲\s*[:：]\s*([^\n]+)/i);
+
+    accountData.sixArmor =
+        armorMatch ? extractNumber(armorMatch[1]) : 0;
+
+
+    /* 设备类型 */
+
+    accountData.device = detectDevice(text);
+
+
+    /* 订单备注 */
+
+    accountData.note = buildNote();
+
+
+    updateUI();
+
+    calculatePrice();
+}
+
+
+/* =========================
+   设备识别
+========================= */
+
+function detectDevice(text) {
+
+    if (/iphone|苹果手机|iPhone/i.test(text)) {
+        return "苹果";
+    }
+
+    if (/ipad|iPad/i.test(text)) {
+        return "iPad";
+    }
+
+    if (/安卓|android/i.test(text)) {
+        return "安卓";
+    }
+
+    if (/电脑|PC|端游/i.test(text)) {
+        return "电脑";
+    }
+
+    /*
+       客户没写设备时，
+       暂时留空，避免程序乱猜。
+    */
 
     return "";
-
 }
 
 
-// =========================================================
-// 提取数字
-// =========================================================
+/* =========================
+   生成账号编号
+========================= */
 
-function getNumber(value) {
+function generateAccountId() {
 
-    const match = value.match(/\d+(?:\.\d+)?/);
+    const now = new Date();
 
-    if (match) {
+    const y = now.getFullYear().toString().slice(-2);
 
-        return parseFloat(match[0]);
+    const m = String(now.getMonth() + 1).padStart(2, "0");
 
+    const d = String(now.getDate()).padStart(2, "0");
+
+    const random =
+        Math.floor(100 + Math.random() * 900);
+
+    return y + m + d + random;
+}
+
+
+/* =========================
+   生成备注
+========================= */
+
+function buildNote() {
+
+    let arr = [];
+
+    if (accountData.aw > 0) {
+        arr.push("AW" + accountData.aw);
     }
 
-    return 0;
-
-}
-
-
-// =========================================================
-// 自动识别
-// =========================================================
-
-function readInfo() {
-
-    const text =
-        document.getElementById("customerInfo").value;
-
-
-    const lines =
-        text.split(/\r?\n/);
-
-
-    const info = {
-
-        money: 0,
-
-        aw: 0,
-
-        red: 0,
-
-        head: 0,
-
-        armor: 0,
-
-        box: 0,
-
-        stamina: 0,
-
-        weight: 0,
-
-        redSkin: false,
-
-        knifeSkin: false
-
-    };
-
-
-    for (let line of lines) {
-
-        line = line.trim();
-
-
-        if (!line) {
-
-            continue;
-
-        }
-
-
-        // =============================
-        // 安全箱
-        // =============================
-
-        if (line.includes("安全箱")) {
-
-            const value = getValue(line);
-
-            const match = value.match(/\d+/);
-
-            if (match) {
-
-                info.box =
-                    parseInt(match[0]);
-
-            }
-
-            // 中文九格
-
-            if (
-                value.includes("九格") ||
-                value.includes("9格")
-            ) {
-
-                info.box = 9;
-
-            }
-
-        }
-
-
-        // =============================
-        // 体力
-        // =============================
-
-        else if (line.includes("体力等级")) {
-
-            const value =
-                getValue(line);
-
-            if (value.includes("满级")) {
-
-                info.stamina = 7;
-
-            }
-            else {
-
-                info.stamina =
-                    getNumber(value);
-
-            }
-
-        }
-
-
-        // =============================
-        // 负重
-        // =============================
-
-        else if (line.includes("负重等级")) {
-
-            const value =
-                getValue(line);
-
-            if (value.includes("满级")) {
-
-                info.weight = 7;
-
-            }
-            else {
-
-                info.weight =
-                    getNumber(value);
-
-            }
-
-        }
-
-
-        // =============================
-        // 仓库纯币
-        // =============================
-
-        else if (line.includes("仓库纯币")) {
-
-            info.money =
-                getNumber(getValue(line));
-
-        }
-
-
-        // =============================
-        // AW
-        // =============================
-
-        else if (
-            line.toLowerCase().includes("aw数量")
-        ) {
-
-            info.aw =
-                getNumber(getValue(line));
-
-        }
-
-
-        // =============================
-        // 红弹
-        // =============================
-
-        else if (line.includes("红弹")) {
-
-            info.red =
-                getNumber(getValue(line));
-
-        }
-
-
-        // =============================
-        // 六头
-        // =============================
-
-        else if (line.includes("六头")) {
-
-            info.head =
-                getNumber(getValue(line));
-
-        }
-
-
-        // =============================
-        // 六甲
-        // =============================
-
-        else if (line.includes("六甲")) {
-
-            info.armor =
-                getNumber(getValue(line));
-
-        }
-
-
-        // =============================
-        // 皮肤
-        // =============================
-
-        else if (
-            line.includes("皮肤")
-        ) {
-
-            const skin =
-                getValue(line);
-
-
-            /*
-             * 这里暂时采用关键词判断。
-             *
-             * 后面你可以告诉我：
-             * 哪些具体皮肤属于红皮，
-             * 哪些属于刀皮。
-             */
-
-            if (
-                skin.includes("红")
-            ) {
-
-                info.redSkin = true;
-
-            }
-
-
-            if (
-                skin.includes("刀")
-            ) {
-
-                info.knifeSkin = true;
-
-            }
-
-        }
-
+    if (accountData.redAmmo > 0) {
+        arr.push("红弹" + accountData.redAmmo);
     }
 
-
-    return info;
-
-}
-
-
-// =========================================================
-// 自动判断比例
-// =========================================================
-
-function calculateRecommendedRatio(info) {
-
-
-    let ratio = 42;
-
-    let reason = "";
-
-
-    // =====================================================
-    // 第一种情况：
-    // 不是9格
-    // =====================================================
-
-    if (info.box !== 9) {
-
-        ratio = 45;
-
-        reason =
-            "不是9格安全箱，比例从 1:45 开始考虑";
-
+    if (accountData.sixHead > 0) {
+        arr.push("六头" + accountData.sixHead);
     }
 
-
-    // =====================================================
-    // 9格
-    // =====================================================
-
-    else {
-
-        /*
-         * 先按照 977 作为基础
-         */
-
-        ratio = 42;
-
-
-        // =============================================
-        // 体力缺等级
-        // =============================================
-
-        const staminaMissing =
-            Math.max(
-                0,
-                7 - info.stamina
-            );
-
-
-        // =============================================
-        // 负重缺等级
-        // =============================================
-
-        const weightMissing =
-            Math.max(
-                0,
-                7 - info.weight
-            );
-
-
-        // =============================================
-        // 每少一级，比例 +1
-        // =============================================
-
-        ratio +=
-            staminaMissing
-            + weightMissing;
-
-
-        // =============================================
-        // 红皮 / 刀皮
-        // =============================================
-
-        const hasRed =
-            info.redSkin;
-
-        const hasKnife =
-            info.knifeSkin;
-
-
-        /*
-         * 977：
-         *
-         * 红皮 + 刀皮 = 42
-         * 一个 = 43
-         * 都没有 = 44
-         *
-         * 这里在等级扣分之后再考虑皮肤。
-         */
-
-        if (
-            hasRed &&
-            hasKnife
-        ) {
-
-            ratio += 0;
-
-        }
-        else if (
-            hasRed ||
-            hasKnife
-        ) {
-
-            ratio += 1;
-
-        }
-        else {
-
-            ratio += 2;
-
-        }
-
-
-        // =============================================
-        // 最低不超过 46
-        // =============================================
-
-        ratio =
-            Math.min(
-                ratio,
-                46
-            );
-
-
-        // =============================================
-        // 原因
-        // =============================================
-
-        reason =
-            "9格安全箱";
-
-        if (
-            info.stamina === 7 &&
-            info.weight === 7
-        ) {
-
-            reason +=
-                "，体力7、负重7";
-
-        }
-        else {
-
-            reason +=
-                `，体力${info.stamina}、负重${info.weight}`;
-
-        }
-
-
-        if (
-            hasRed &&
-            hasKnife
-        ) {
-
-            reason +=
-                "，红皮+刀皮";
-
-        }
-        else if (
-            hasRed ||
-            hasKnife
-        ) {
-
-            reason +=
-                "，有红皮/刀皮";
-
-        }
-        else {
-
-            reason +=
-                "，无红皮/刀皮";
-
-        }
-
+    if (accountData.sixArmor > 0) {
+        arr.push("六甲" + accountData.sixArmor);
     }
 
-
-    return {
-        ratio: ratio,
-        reason: reason
-    };
-
+    return arr.join(" ");
 }
 
 
-// =========================================================
-// 自动识别 + 推荐比例
-// =========================================================
+/* =========================
+   更新页面
+========================= */
 
-function analyze() {
+function updateUI() {
 
-
-    const info =
-        readInfo();
-
-
-    // 显示识别结果
-
-    document.getElementById("infoCard").style.display =
-        "block";
-
-
-    document.getElementById("boxValue").innerText =
-        info.box ? info.box + "格" : "未识别";
-
-
-    document.getElementById("staminaValue").innerText =
-        info.stamina || "未识别";
-
-
-    document.getElementById("weightValue").innerText =
-        info.weight || "未识别";
-
-
-    document.getElementById("redSkinValue").innerText =
-        info.redSkin ? "有" : "无";
-
-
-    document.getElementById("knifeSkinValue").innerText =
-        info.knifeSkin ? "有" : "无";
-
-
-    document.getElementById("moneyValue").innerText =
-        info.money + " M";
-
-
-    document.getElementById("awValue").innerText =
-        info.aw;
-
-
-    document.getElementById("redValue").innerText =
-        info.red + " 发";
-
-
-    document.getElementById("headValue").innerText =
-        info.head;
-
-
-    document.getElementById("armorValue").innerText =
-        info.armor;
-
-
-    // 自动推荐比例
-
-    const recommendation =
-        calculateRecommendedRatio(info);
-
-
-    document.getElementById("ratio").value =
-        recommendation.ratio;
-
-
-    document.getElementById("recommendBox").style.display =
-        "block";
-
-
-    document.getElementById("recommendValue").innerText =
-        "1:" + recommendation.ratio;
-
-
-    document.getElementById("recommendReason").innerText =
-        recommendation.reason;
-
+    setText("r_id", accountData.id);
+    setText("r_server", accountData.server);
+    setText("r_level", accountData.level);
+    setText("r_money", accountData.money);
+    setText("r_rent", accountData.money);
+    setText("r_stamina", accountData.stamina);
+    setText("r_weight", accountData.weight);
+    setText("r_rank", accountData.rank);
+    setText("r_skin", accountData.skin);
+    setText("r_safe", accountData.safe);
+    setText("r_login", accountData.login);
+    setText("r_device", accountData.device);
+    setText("r_note", accountData.note);
 }
 
 
-// =========================================================
-// 计算报价
-// =========================================================
+/* =========================
+   报价计算
+========================= */
 
-function calculate() {
-
-
-    const info =
-        readInfo();
-
+function calculatePrice() {
 
     const ratio =
-        parseFloat(
-            document.getElementById("ratio").value
-        );
+        parseFloat(document.getElementById("ratio").value);
 
-
-    if (
-        !ratio ||
-        ratio <= 0
-    ) {
-
-        alert(
-            "请输入正确的哈弗币比例"
-        );
-
+    if (!ratio || ratio <= 0) {
+        alert("请输入正确的比例，例如 42。");
         return;
-
     }
 
+    let moneyM =
+        parseFloat(
+            String(accountData.money)
+                .replace("M", "")
+        ) || 0;
 
-    // 哈弗币
+
+    /*
+       例如：
+
+       100M
+       1:42
+
+       100 × 100 ÷ 42
+       = 238.10 元
+    */
 
     const moneyPrice =
-        info.money * 100 / ratio;
-
-
-    // AW
+        moneyM * 100 / ratio;
 
     const awPrice =
-        info.aw * 0.6;
-
-
-    // 红弹
+        accountData.aw * 0.6;
 
     const redPrice =
-        info.red * 0.1;
-
-
-    // 六头
+        accountData.redAmmo * 0.1;
 
     const headPrice =
-        info.head * 1.5;
-
-
-    // 六甲
+        accountData.sixHead * 1.5;
 
     const armorPrice =
-        info.armor * 1.5;
-
-
-    // 总价
+        accountData.sixArmor * 1.5;
 
     const total =
-        moneyPrice
-        + awPrice
-        + redPrice
-        + headPrice
-        + armorPrice;
+        moneyPrice +
+        awPrice +
+        redPrice +
+        headPrice +
+        armorPrice;
 
 
-    // 弹窗比例
+    document.getElementById("priceResult").innerHTML = `
+        <div class="price-box">
 
-    document.getElementById("resultRatio").innerText =
-        "哈弗币比例：1 : " + ratio;
+            <div class="price-line">
+                <span>哈弗币比例</span>
+                <strong>1:${ratio}</strong>
+            </div>
 
+            <div class="price-line">
+                <span>哈弗币</span>
+                <strong>¥${moneyPrice.toFixed(2)}</strong>
+            </div>
 
-    // 明细
+            <div class="price-line">
+                <span>AW</span>
+                <strong>¥${awPrice.toFixed(2)}</strong>
+            </div>
 
-    document.getElementById("priceList").innerHTML =
+            <div class="price-line">
+                <span>红弹</span>
+                <strong>¥${redPrice.toFixed(2)}</strong>
+            </div>
 
-        "哈弗币："
-        + moneyPrice.toFixed(2)
-        + " 元<br>"
+            <div class="price-line">
+                <span>六头</span>
+                <strong>¥${headPrice.toFixed(2)}</strong>
+            </div>
 
-        + "AW："
-        + awPrice.toFixed(2)
-        + " 元<br>"
+            <div class="price-line">
+                <span>六甲</span>
+                <strong>¥${armorPrice.toFixed(2)}</strong>
+            </div>
 
-        + "红弹："
-        + redPrice.toFixed(2)
-        + " 元<br>"
+            <div class="price-line total">
+                <span>最终报价</span>
+                <span>¥${total.toFixed(2)}</span>
+            </div>
 
-        + "六头："
-        + headPrice.toFixed(2)
-        + " 元<br>"
-
-        + "六甲："
-        + armorPrice.toFixed(2)
-        + " 元";
-
-
-    // 总价
-
-    document.getElementById("totalPrice").innerText =
-        "最终报价：¥"
-        + total.toFixed(2);
-
-
-    // 复制内容
-
-    window.currentQuote =
-
-        "三角洲账号报价\n"
-
-        + "哈弗币比例：1:"
-        + ratio
-        + "\n"
-
-        + "哈弗币："
-        + moneyPrice.toFixed(2)
-        + " 元\n"
-
-        + "AW："
-        + awPrice.toFixed(2)
-        + " 元\n"
-
-        + "红弹："
-        + redPrice.toFixed(2)
-        + " 元\n"
-
-        + "六头："
-        + headPrice.toFixed(2)
-        + " 元\n"
-
-        + "六甲："
-        + armorPrice.toFixed(2)
-        + " 元\n"
-
-        + "最终报价："
-        + total.toFixed(2)
-        + " 元";
-
-
-    // 打开弹窗
-
-    document
-        .getElementById("resultModal")
-        .classList.add("show");
-
+        </div>
+    `;
 }
 
 
-// =========================================================
-// 复制报价
-// =========================================================
+/* =========================
+   腾讯文档入库
+========================= */
 
-function copyQuote() {
+function getTencentRow() {
+
+    /*
+       顺序必须严格对应腾讯文档：
+
+       账号编号
+       区服
+       等级
+       纯币
+       出租价值
+       体力等级
+       负重等级
+       段位
+       皮肤
+       保险
+       登录方式
+       设备类型
+       订单备注
+    */
+
+    return [
+        accountData.id,
+        accountData.server,
+        accountData.level,
+        accountData.money,
+        accountData.money,
+        accountData.stamina,
+        accountData.weight,
+        accountData.rank,
+        accountData.skin,
+        accountData.safe,
+        accountData.login,
+        accountData.device,
+        accountData.note
+    ];
+}
 
 
-    if (
-        !window.currentQuote
-    ) {
+async function copyForTencentDocs() {
 
+    if (!accountData.money &&
+        !accountData.level &&
+        !accountData.rank) {
+
+        alert("请先点击“开始解析”。");
         return;
-
     }
 
+    const row = getTencentRow();
 
-    navigator.clipboard
-        .writeText(
-            window.currentQuote
-        )
-        .then(
-            function() {
+    /*
+       Tab 分隔。
 
-                alert(
-                    "报价已经复制！"
-                );
+       粘贴到腾讯文档时，
+       每个字段会自动进入对应单元格。
+    */
 
-            }
-        )
-        .catch(
-            function() {
+    const text = row.join("\t");
 
-                alert(
-                    "复制失败，请手动复制。"
-                );
+    try {
 
-            }
-        );
+        await navigator.clipboard.writeText(text);
 
+        document.getElementById("copyStatus").textContent =
+            "✓ 已复制，可以直接粘贴到腾讯文档新的一行。";
+
+    } catch (error) {
+
+        /*
+           兼容部分旧浏览器
+        */
+
+        const textarea =
+            document.createElement("textarea");
+
+        textarea.value = text;
+
+        document.body.appendChild(textarea);
+
+        textarea.select();
+
+        document.execCommand("copy");
+
+        textarea.remove();
+
+        document.getElementById("copyStatus").textContent =
+            "✓ 已复制，可以直接粘贴到腾讯文档新的一行。";
+    }
 }
 
 
-// =========================================================
-// 关闭弹窗
-// =========================================================
-
-function closeModal() {
-
-    document
-        .getElementById("resultModal")
-        .classList.remove("show");
-
-}
-
-
-// =========================================================
-// 清空
-// =========================================================
-
-function clearAll() {
-
-
-    document.getElementById("customerInfo").value =
-        "";
-
-
-    document.getElementById("ratio").value =
-        "42";
-
-
-    document.getElementById("infoCard").style.display =
-        "none";
-
-
-    document.getElementById("recommendBox").style.display =
-        "none";
-
-
-    window.currentQuote =
-        "";
-
-}
-
-
-// =========================================================
-// 示例
-// =========================================================
+/* =========================
+   示例
+========================= */
 
 function loadExample() {
 
-
-const example =
-
+    document.getElementById("customerText").value =
 `总资产（M）：431.3m
 仓库纯币（M）：100m
 赛季安全箱：九格
@@ -1438,6 +922,7 @@ const example =
 游戏等级：60
 绝密kd：0.6
 是否实名本人/协助人脸：本人
+联系电话：18035851319
 在线时间：全天
 aw数量：50
 红弹：200发
@@ -1445,18 +930,45 @@ aw数量：50
 六甲：12
 皮肤：吴彦祖北极星`;
 
+    parseInfo();
+}
 
-    document.getElementById("customerInfo").value =
-        example;
 
+/* =========================
+   清空
+========================= */
 
-    document.getElementById("ratio").value =
-        "42";
+function clearAll() {
 
+    document.getElementById("customerText").value = "";
+
+    accountData = {
+        id: "",
+        server: "",
+        level: "",
+        money: "",
+        stamina: "",
+        weight: "",
+        rank: "",
+        skin: "",
+        safe: "",
+        login: "",
+        device: "",
+        note: "",
+        aw: 0,
+        redAmmo: 0,
+        sixHead: 0,
+        sixArmor: 0
+    };
+
+    document.getElementById("priceResult").innerHTML = "";
+
+    document.getElementById("copyStatus").textContent = "";
+
+    updateUI();
 }
 
 </script>
-
 
 </body>
 </html>
